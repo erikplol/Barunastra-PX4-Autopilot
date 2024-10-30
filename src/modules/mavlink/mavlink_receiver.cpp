@@ -569,7 +569,8 @@ void MavlinkReceiver::handle_message_command_both(mavlink_message_t *msg, const 
 		// Reject alien commands only if there is no forwarding or we've never seen target component before
 		if (!_mavlink.get_forwarding_on()
 		    || !_mavlink.component_was_seen(cmd_mavlink.target_system, cmd_mavlink.target_component, _mavlink)) {
-			acknowledge(msg->sysid, msg->compid, cmd_mavlink.command, vehicle_command_ack_s::VEHICLE_CMD_RESULT_FAILED);
+			PX4_INFO("Ignore command %d from %d/%d to %d/%d",
+				 cmd_mavlink.command, msg->sysid, msg->compid, cmd_mavlink.target_system, cmd_mavlink.target_component);
 		}
 
 		return;
