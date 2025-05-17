@@ -114,22 +114,23 @@ def main():
 
 
     if args.port == None:
-        if sys.platform == "darwin":
-            args.port = "/dev/tty.usbmodem01"
-        else:
-            serial_list = mavutil.auto_detect_serial(preferred_list=['*FTDI*',
-                "*Arduino_Mega_2560*", "*3D_Robotics*", "*USB_to_UART*", '*PX4*', '*FMU*', "*Gumstix*"])
+        args.port = "/dev/serial/by-id/usb-Auterion_PX4_FMU_v6X.x_0-if00"
+        #if sys.platform == "darwin":
+        #    args.port = "/dev/tty.usbmodem01"
+        #else:
+        #    serial_list = mavutil.auto_detect_serial(preferred_list=['*FTDI*',
+        #        "*Arduino_Mega_2560*", "*3D_Robotics*", "*USB_to_UART*", '*PX4*', '*FMU*', "*Gumstix*"])
+        #
+        #    if len(serial_list) == 0:
+        #        print("Error: no serial connection found")
+        #        return
 
-            if len(serial_list) == 0:
-                print("Error: no serial connection found")
-                return
-
-            if len(serial_list) > 1:
-                print('Auto-detected serial ports are:')
-                for port in serial_list:
-                    print(" {:}".format(port))
-            print('Using port {:}'.format(serial_list[0]))
-            args.port = serial_list[0].device
+        #    if len(serial_list) > 1:
+        #        print('Auto-detected serial ports are:')
+        #        for port in serial_list:
+        #            print(" {:}".format(port))
+        #    print('Using port {:}'.format(serial_list[0]))
+        #    args.port = serial_list[0].device
 
 
     print("Connecting to MAVLINK...")
